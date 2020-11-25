@@ -1,0 +1,513 @@
+WindowManager:
+  MainWindow:
+  EncWindow:
+  DecWindow:
+  TripleDESWindow:
+  ConvertWindow:
+
+
+
+<MainWindow>:
+  name: "main"
+
+  FloatLayout:
+    Image:
+      source: "project.jpg"
+      allow_stretch: True
+
+    Label:
+      font_size: 60
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.6, 0.2
+      text: "Welcome to"
+      pos_hint: {"x": 0.2, "top": 0.9}
+
+    Label:
+      font_size: 60
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.6, 0.2
+      text: "the DES Encryptor/Decryptor"
+      pos_hint: {"x": 0.2, "top": 0.8}
+
+
+    Button:
+      font_size: 40
+      background_color: 0,0,0,1
+      color: 1, 1, 0.99, 1
+      size_hint: 0.04, 0.05
+      text: "i"
+      pos_hint: {"x":0.94, "top":0.88}
+      on_release:
+        root.info()
+
+    Button:
+      font_size: 50
+      background_color: 0.2, 0.7, 1, 0.7
+      color: 1,1,0.99,1
+      size_hint: 0.35, 0.2
+      text: "Encryption"
+      pos_hint: {"x":0.1, "top":0.55}
+      on_release:
+        app.root.current = "encrypt"
+        root.manager.transition.direction = "right"
+
+    Button:
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.35, 0.2
+      text: "Decryption"
+      pos_hint: {"x":0.55, "top":0.55}
+      on_release:
+        app.root.current = "decrypt"
+        root.manager.transition.direction = "left"
+
+    Button:
+      font_size: 50
+      background_color: 0.2, 0.7, 1, 0.7
+      color: 1,1,0.99,1
+      size_hint: 0.35, 0.2
+      text: "Triple DES"
+      pos_hint: {"x":0.1, "top":0.3}
+      on_release:
+        app.root.current = "Triple"
+        root.manager.transition.direction = "up"
+
+    Button:
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.35, 0.2
+      text: "Convert"
+      pos_hint: {"x":0.55, "top":0.3}
+      on_release:
+        app.root.current = "convert"
+        root.manager.transition.direction = "down"
+
+
+
+<EncWindow>:
+  key: key
+  plaintext: plaintext
+  name: "encrypt"
+
+  FloatLayout:
+
+    Image:
+      source: "project.jpg"
+      allow_stretch: True
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "Plaintext: "
+      pos_hint: {"x":0.04, "top":0.84}
+
+    TextInput:
+      font_size: 50
+      color:0,0,0,1
+      size_hint: 0.38, 0.2
+      id: plaintext
+      multiline: False
+      pos_hint: {"x":0.34, "top":0.84}
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "Key: "
+      pos_hint: {"x":0.04, "top":0.60}
+
+    TextInput:
+      font_size: 50
+      color:0,0,0,1
+      size_hint: 0.38, 0.2
+      id: key
+      multiline: False
+      pos_hint: {"x":0.34, "top":0.60}
+
+    Button:
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Clear"
+      pos_hint: {"x": 0.04, "top":0.16}
+      on_release:
+        root.clear()
+
+    Button:
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Main Menu"
+      pos_hint: {"x": 0.76, "top":0.16}
+      on_release:
+        app.root.current = "main"
+        root.manager.transition.direction = "left"
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "Ciphertext: "
+      pos_hint: {"x":0.04, "top":0.36}
+
+    Button:
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.38, 0.2
+      text: "Encrypt"
+      pos_hint: {"x":0.34, "top":0.36}
+      on_release:
+        root.enc()
+
+
+    Button: #1
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 1 - 4"
+      pos_hint: {"x": 0.76, "top":0.84}
+      on_release:
+        root.round14()
+
+    Button: #2
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 5 - 8"
+      pos_hint: {"x": 0.76, "top":0.68}
+      on_release:
+        root.round58()
+
+    Button: #3
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 9 - 12"
+      pos_hint: {"x": 0.76, "top":0.52}
+      on_release:
+        root.round912()
+
+    Button: #4
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 13 - 16"
+      pos_hint: {"x": 0.76, "top":0.36}
+      on_release:
+        root.round1316()
+
+
+
+
+
+
+<DecWindow>:
+  key: key
+  ciphertext: ciphertext
+  name: "decrypt"
+
+  FloatLayout:
+
+    Image:
+      source: "project.jpg"
+      allow_stretch: True
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "Ciphertext: "
+      pos_hint: {"x":0.04, "top":0.84}
+
+    TextInput:
+      font_size: 50
+      color:0,0,0,1
+      size_hint: 0.38, 0.2
+      id: ciphertext
+      multiline: False
+      pos_hint: {"x":0.34, "top":0.84}
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "Key: "
+      pos_hint: {"x":0.04, "top":0.6}
+
+    TextInput:
+      font_size: 50
+      color:0,0,0,1
+      size_hint: 0.38, 0.2
+      id: key
+      multiline: False
+      pos_hint: {"x":0.34, "top":0.6}
+
+    Button:
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Clear"
+      pos_hint: {"x": 0.04, "top":0.16}
+      on_release:
+        root.clear()
+
+    Button:
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Main Menu"
+      pos_hint: {"x": 0.76, "top":0.16}
+      on_release:
+        app.root.current = "main"
+        root.manager.transition.direction = "right"
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "Plaintext: "
+      pos_hint: {"x":0.04, "top":0.36}
+
+    Button:
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.38, 0.2
+      text: "Decrypt"
+      pos_hint: {"x":0.34, "top":0.36}
+      on_release:
+        root.dec()
+
+
+    Button: #1
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 1 - 4"
+      pos_hint: {"x": 0.76, "top":0.84}
+      on_release:
+        root.round14()
+
+    Button: #2
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 5 - 8"
+      pos_hint: {"x": 0.76, "top":0.68}
+      on_release:
+        root.round58()
+
+    Button: #3
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 9 - 12"
+      pos_hint: {"x": 0.76, "top":0.52}
+      on_release:
+        root.round912()
+
+    Button: #4
+
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Rounds 13 - 16"
+      pos_hint: {"x": 0.76, "top":0.36}
+      on_release:
+        root.round1316()
+
+
+<ConvertWindow>:
+  hexInput: hexInput
+  binInput: binInput
+  name: "convert"
+  FloatLayout:
+    Image:
+      source: "project.jpg"
+      allow_stretch: True
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "From HEX to BIN: "
+      pos_hint: {"x":0.04, "top":0.84}
+
+    TextInput:
+      font_size: 50
+      color:0,0,0,1
+      size_hint: 0.48, 0.2
+      id: hexInput
+      multiline: False
+      pos_hint: {"x":0.40, "top":0.84}
+
+    Label:
+      font_size: 50
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.3, 0.2
+      text: "From BIN to HEX: "
+      pos_hint: {"x":0.04, "top":0.58}
+
+    TextInput:
+      font_size: 50
+      color:0,0,0,1
+      size_hint: 0.48, 0.2
+      id: binInput
+      multiline: False
+      pos_hint: {"x":0.40, "top":0.58}
+
+    Button:
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Main Menu"
+      pos_hint: {"x": 0.76, "top":0.16}
+      on_release:
+        app.root.current = "main"
+        root.manager.transition.direction = "up"
+
+    Button:
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.35, 0.15
+      text: "Convert to BIN"
+      pos_hint: {"x":0.1, "top":0.35}
+      on_release:
+        root.converter2bin()
+    Button:
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.35, 0.15
+      text: "Convert to HEX"
+      pos_hint: {"x":0.55, "top":0.35}
+      on_release:
+        root.converter2hex()
+
+<TripleDESWindow>: #Triple DES Window
+  des_text: des_text
+  key1: key1
+  key2: key2
+  key3: key3
+  name: "Triple"
+
+  FloatLayout:
+    Image: #Background Image
+      source: "project.jpg"
+      allow_stretch: True
+
+    Button: #Main Menu
+      font_size: 32
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.2, 0.12
+      text: "Main Menu"
+      pos_hint: {"x": 0.76, "top":0.16}
+      on_release:
+        app.root.current = "main"
+        root.manager.transition.direction = "down"
+
+    Label: #Plaintext/Ciphertext
+      font_size: 40
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.2, 0.2
+      text: "Plaintext/\nCiphertext: "
+      pos_hint: {"x":0.04, "top":0.96}
+
+    TextInput: #Plaintext/Ciphertext
+      font_size: 40
+      color:0,0,0,1
+      size_hint: 0.35, 0.2
+      id: des_text
+      multiline: False
+      pos_hint: {"x":0.24, "top":0.96}
+
+    Label: #Key1
+      font_size: 40
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.2, 0.2
+      text: "Key1: "
+      pos_hint: {"x":0.04, "top":0.72}
+
+    TextInput: #Key1
+      font_size: 40
+      color:0,0,0,1
+      size_hint: 0.35, 0.2
+      id: key1
+      multiline: False
+      pos_hint: {"x":0.24, "top":0.72}
+
+    Label: #Key2
+      font_size: 40
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.2, 0.2
+      text: "Key2: "
+      pos_hint: {"x":0.04, "top":0.48}
+
+    TextInput: #Key2
+      font_size: 40
+      color:0,0,0,1
+      size_hint: 0.35, 0.2
+      id: key2
+      multiline: False
+      pos_hint: {"x":0.24, "top":0.48}
+
+    Label: #Key3
+      font_size: 40
+      color: 0.9,0.9,0.9,1
+      size_hint: 0.2, 0.2
+      text: "Key3: "
+      pos_hint: {"x":0.04, "top":0.24}
+
+    TextInput: #Key3
+      font_size: 40
+      color:0,0,0,1
+      size_hint: 0.35, 0.2
+      id: key3
+      multiline: False
+      pos_hint: {"x":0.24, "top":0.24}
+
+    Button: #Triple DES Encryption
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.3, 0.2
+      text: "Encrypt"
+      pos_hint: {"x":0.66, "top":0.82}
+      on_release:
+        root.TripleDESencryption()
+
+    Button: #Triple DES Decryption
+      font_size: 50
+      background_color: 0.2,0.7,1,0.7
+      color: 1,1,0.99,1
+      size_hint: 0.3, 0.2
+      text: "Decrypt"
+      pos_hint: {"x":0.66, "top":0.52}
+      on_release:
+        root.TripleDESdecryption()
