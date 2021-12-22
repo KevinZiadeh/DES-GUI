@@ -18,4 +18,24 @@ We have also added hexadecimal to binary and binary to hexadecimal converter. Th
 ```
 
 ## Usage
-Download repository ``` git clone <url>```, browse to the download location and run ```python main.py``` making sure it is python 3.7
+```
+$ git clone https://github.com/KevinZiadeh/DES-GUI.git
+$ cd DES-GUI
+$ pip install -r requirements.txt
+```
+
+## Run
+In order to run this application, make sure you have the correct python and kivy version installed then run
+```
+$ python main.py
+```
+
+![](res/1.PNG?raw=true)
+---
+![](res/2.PNG?raw=true)
+---
+![](res/3.PNG?raw=true)
+---
+![](res/4.PNG?raw=true)
+---
+![](res/5.PNG?raw=true)
