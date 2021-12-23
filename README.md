@@ -1,5 +1,5 @@
 # DES-GUI
-> University Project (EECE 455 @ AUB) where we implement DES and tripleDES encryption and decryption with a GUI
+> University Project (EECE 455 - Cryptography and Networks Security @ AUB) where we implement DES and tripleDES encryption and decryption with a GUI
 
 ## Requirements
   To be able to run this program, the following is needed
